@@ -1,8 +1,13 @@
 # JavaScript-Challenge
 
 Notes:
-- Need to clear screen after each filtering event so that data does not load twice
-- Created clearTable function and added dedicated button; tried but failed to incorporate an automatic clearTable funcion as part of the normal filtering process
+- The logic around multiple filter functions proved to be really challenging, and I quickly discovered that using an "&&" function to join two or more filters would not work.  I was finally able to develop a chained filter.  The initial data set is stored as filteredUfo.  All input values are stored in an array "inputValues".  I then created a forEach loop to iterat through each inputValue.  If the current value is a non-empty string, the filteredUfo is filtered by that particular input field.  If not, the filteredUfo remains unchanged.  This was the most difficult part of the assignment, and I would be interested in learning whether there are simpler ways to filter on multiple fields.
+
+
+
+9/22:  UFO-level-2
+- Added additional forms
+- Solved the cumulative filtering function
 
 
 9/21:  UFO-level-1
@@ -11,7 +16,7 @@ Notes:
 - Add d3 select and append functions to represent data on index.html page
 - Add filter function; console.log output
 - Loading correctly with and without filter input
-- Able to clear tables in between queries
+- Created clearTable function and added dedicated button
 
 
 
