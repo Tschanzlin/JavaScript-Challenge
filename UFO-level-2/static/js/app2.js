@@ -2,36 +2,63 @@
 var tableData = data;
 
 // Select table by ID
-var table = d3.select("#ufo-table")
-var body = d3.select("tbody")
+var table = d3.select("#ufo-table");
+var body = d3.select("tbody");
 
-
-// Code to select date from input form
-// Select button and form
+// Select button and forms; create event handlers to activate functions
 var button = d3.select("#filter-btn");
-var form = d3.select("#filters");
+var button1 = d3.select("#clear-btn");
+var form = d3.select(".form-group");
 
-// Create event handlers for buttons and forms
 button.on("click", runEnter);
+button1.on("click", clearTable);
 form.on("submit", runEnter);
 
-// Create run function for both events (NOTE:  replaced inputElement / InputValue with chained
-// references to filter ID in each function)
+
+// ---------------------- Load and Clear Table Functions -------------------------------
+// Function to load relavent "inputData" array into html file; for each object, 
+// return key value pairs and append to html table
+function loadTable(inputData) {
+    inputData.forEach((ufo) => {
+        var row = body.append("tr");
+        Object.entries(ufo).forEach(([key, value]) => {
+            var cell = row.append("td");
+            cell.text(value);
+            // console.log(`${key}:  ${value}`);
+        });
+    });
+}
+
+// Function to clear table (assigned to "Clear Table" button)
+function clearTable() {
+    d3.selectAll("tbody>tr").remove();
+    //    d3.selectAll(".filter list-group-item").remove();
+    console.log("Clear table");
+}
+
+
+// ---------------------- Initialize Site ---------------------------------------------
+// Call "loadTable" function; initialize site with all data from "data" fill
+loadTable(data)
+
+
+// ---------------------- Program Body; Define run and fltering functions --------------
+// Function to select and filter input values; calls clearTable and loadTable functions
+
 function runEnter() {
     d3.event.preventDefault();
 
     // Set input values for each form adn combine into inputValues array
-    dateValue = d3.select("#datetime").property("value");
-    cityValue = d3.select("#city").property("value");
-    stateValue = d3.select("#state").property("value");
-    countryValue = d3.select("#country").property("value");
-    shapeValue = d3.select("#shape").property("value");
-    inputValues = [dateValue, cityValue, stateValue, countryValue, shapeValue]
+    var dateValue = d3.select("#datetime").property("value");
+    var cityValue = d3.select("#city").property("value");
+    var stateValue = d3.select("#state").property("value");
+    var countryValue = d3.select("#country").property("value");
+    var shapeValue = d3.select("#shape").property("value");
+    var inputValues = [dateValue, cityValue, stateValue, countryValue, shapeValue]
     // console.log(dateValue, cityValue, stateValue, countryValue, shapeValue)
     // console.log("--------------")
     console.log(inputValues)
     console.log("--------------")
-
 
     // Add filter functions for each key field -- date, city, state, country, and shape
     function selectDate(ufodate) {
@@ -101,24 +128,8 @@ function runEnter() {
         count += 1
     });
 
-    // Loop through filteredUfo2 array; for each object, return key value pairs and
-    // append to html table 
-    filteredUfo2.forEach((ufo) => {
-        var row = body.append("tr");
-        Object.entries(ufo).forEach(([key, value]) => {
-            var cell = row.append("td");
-            cell.text(value);
-            // console.log(`${key}:  ${value}`);
-        });
-    });
+    // First call clearTable to refresh page; then call loadTable to insert filtered data
+    clearTable();
+    loadTable(filteredUfo2);
 }
 
-// Function to clear table assigned to "Clear Table" button
-var button1 = d3.select("#clear-btn");
-button1.on("click", clearTable);
-
-function clearTable() {
-    d3.selectAll("tbody>tr").remove();
-    //    d3.selectAll(".filter list-group-item").remove();
-    console.log("Clear table")
-}

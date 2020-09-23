@@ -61,7 +61,6 @@ function runEnter() {
     }
 }
 
-
 // Function to clear table assigned to "Clear Table" button
 var button1 = d3.select("#clear-btn");
 button1.on("click", clearTable);
