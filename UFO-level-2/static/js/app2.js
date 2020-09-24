@@ -15,9 +15,9 @@ button1.on("click", clearTable);
 form.on("submit", runEnter);
 
 
-// ---------------------- Load and Clear Table Functions -------------------------------
+// ---------------------- Load and Clear Table Functions -----------------------------------
 // Function to load relavent "inputData" array into html file; for each object, 
-// return key value pairs and append to html table
+// return key value pairs and append values to html table
 function loadTable(inputData) {
     inputData.forEach((ufo) => {
         var row = body.append("tr");
@@ -37,26 +37,25 @@ function clearTable() {
 }
 
 
-// ---------------------- Initialize Site ---------------------------------------------
+// ---------------------- Initialize Site --------------------------------------------------
 // Call "loadTable" function; initialize site with all data from "data" fill
 loadTable(data)
 
 
-// ---------------------- Program Body; Define run and fltering functions --------------
+// ---------------------- Program Body; Function runEnter executed on button clicks --------
 // Function to select and filter input values; calls clearTable and loadTable functions
 
 function runEnter() {
     d3.event.preventDefault();
 
-    // Set input values for each form adn combine into inputValues array
+    // Set input values for each form and combine into inputValues array
     var dateValue = d3.select("#datetime").property("value");
     var cityValue = d3.select("#city").property("value");
     var stateValue = d3.select("#state").property("value");
     var countryValue = d3.select("#country").property("value");
     var shapeValue = d3.select("#shape").property("value");
     var inputValues = [dateValue, cityValue, stateValue, countryValue, shapeValue]
-    // console.log(dateValue, cityValue, stateValue, countryValue, shapeValue)
-    // console.log("--------------")
+
     console.log(inputValues)
     console.log("--------------")
 
@@ -78,9 +77,9 @@ function runEnter() {
     }
 
     // Loop through inputValues and filter if non-string value present; 
-    // if no inputValue present; array is not filtered by that form entry
+    // if no inputValue present, array is not filtered by that form entry
     // NOTE:  Counter serves to identify which inputValue to filter on
-    // and sorts from first from entry (dateValue) to last (shapValue) 
+    // and sorts from first from entry (dateValue) to last (shapeValue) 
     var filteredUfo2 = data
 
     var count = 0;
