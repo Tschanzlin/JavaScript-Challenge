@@ -12,7 +12,7 @@ var form = d3.select(".form-group");
 
 button.on("click", runEnter);
 button1.on("click", clearTable);
-form.on("submit", runEnter);
+form.on("change", runEnter);
 
 
 // ---------------------- Load and Clear Table Functions -----------------------------------
